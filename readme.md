@@ -1,6 +1,9 @@
 # ![logo](https://github.com/maksim-volkmann/42-project-badges/blob/main/badges/born2beroote.png?raw=true)<br>Born2beroot
 
-$${\color{red}\text{Note: This guide was created using a Mac!}}$$
+> [!TIP]
+> To exit the virtual machine and return to your original machine, press the `control` button on Mac and `ctrl` on Windows.
+
+<!-- $${\color{red}\text{Note: This guide was created using a Mac!}}$$ -->
 
 ## Mandatory part
 
@@ -11,9 +14,13 @@ Download the `debian-xx.x.x-amd64-netinst.iso` file from [here](https://cdimage.
 
 
 1. Create VM for your project inside the VirtualBox.
+
 ![install](./img/born2beroot_01.png)
+
 2. Name your VM anything you want, and for the `Folder`: field, select the `goinfre` folder. It will automatically choose your user's folder. You have to do this because every student gets 10GB of memory on the server, and the goinfre folder uses local memory, which is necessary as we require more than 10GB. Leave `ISO Image` empty.<br>
+
 ![select](./img/born2beroot_02_f.png)
+
 3. Select 1GB of RAM (it should be enough)
 ![memory](./img/born2beroot_03.png)
 4. Select 30.8 GB for the simple BONUS part where we are going to set up partitions, and leave the VDI as the hard disk type. And press `Finish`.
@@ -246,7 +253,7 @@ Download the `debian-xx.x.x-amd64-netinst.iso` file from [here](https://cdimage.
 ![partition_selection](./img/partition_100.png)
 117. Select deb.debian.org
 ![partition_selection](./img/partition_101.png)
-118. Leave it empty and select `Contiinue`.
+118. Leave it empty and select `Continue`.
 ![partition_selection](./img/partition_102.png)
 119. Select `No`.
 ![partition_selection](./img/partition_103.png)
@@ -254,28 +261,149 @@ Download the `debian-xx.x.x-amd64-netinst.iso` file from [here](https://cdimage.
 ![partition_selection](./img/partition_104.png)
 121. Select `Yes`
 ![partition_selection](./img/partition_105.png)
-122. Here you have to install GRUB boot loader. Select available drive.
+122. Here you have to install GRUB boot loader. Select available drive.<br><br>
 ![partition_selection](./img/partition_106.png)
-123. Select `Continue` to finish the installation.
+123. Select `Continue` to finish the installation.<br><br>
 ![partition_selection](./img/partition_107.png)
 124. Log in to the machine and write the command: `lsblk`. Partition size is not indentical, but we don't care about size, we only care about the structure.
 ![partition_selection](./img/partition_108.png)
 
+# ⚙️ Configurations
 
-# Configurations
-
-1. Type `su -` to log in as root user. You will be asked to provide root password. If you were successful your, username name will be changed to `root@your_host_name`.
+1. Type `su -` to log in as root user. You will be asked to provide root password. If you were successful your username name will be changed to `root@your_host_name`.
 2. Type `apt-get update`.
-3. Type `apt-get upgrade -y`(-y flag means, that you confirm, that additional disk space will be used to install the upgrades).<br>
+	<details>
+	<summary>What is "<em>apt-get update</em>"?</summary>
+	<br>
+	<em>This command refreshes the local package index, which is essentially a catalog of available software packages. It fetches the latest information about the versions of packages available in the repositories. However, it doesn't make any changes to the actual software on your system.</em><br>
+	</details>
+3. Type `apt-get upgrade -y` (-y flag means, that you confirm, that additional disk space will be used to install the upgrades).
 
-<em>`apt-get update:` This command refreshes the local package index, which is essentially a catalog of available software packages. It fetches the latest information about the versions of packages available in the repositories. However, it doesn't make any changes to the actual software on your system.</em><br>
+	<details>
+	<summary>What is "<em>apt-get upgrade</em>"?</summary>
+	<br>
+	<em>This command, when executed after apt-get update, looks at the local package index to determine if there are newer versions of the packages currently installed on your system. If it finds newer versions, it then downloads and installs those updates. The upgrade process ensures that your installed software is brought up to the latest available versions.</em>
+4. To install sudo, type `apt install sudo`
+	<details>
+	<summary>What is "<em>sudo</em>"?</summary>
 
-<em>`apt-get upgrade:` This command, when executed after apt-get update, looks at the local package index to determine if there are newer versions of the packages currently installed on your system. If it finds newer versions, it then downloads and installs those updates. The upgrade process ensures that your installed software is brought up to the latest available versions.</em>
+	>`sudo` is a tool on your computer that grants you temporary superpowers for specific tasks. It's like having a key to unlock special doors when needed. When you use `sudo`, you're saying, "I need to do something important, and I have permission." Imagine it as having a special key that fits only one lock—the door to that particular task. Once you've completed that task, the temporary key disappears, ensuring that regular users can't accidentally or intentionally make big changes. These permissions are defined in a rule book called "/etc/sudoers." By default, the first person who sets up the computer has these permissions, and others can be given them later. So, `sudo` is a security measure, akin to having a special key that opens certain doors only when necessary, and only for those who should have access.
+	</details>
 
-4. s
+5. Type `usermod -aG sudo your_username`.
+
+	<details>
+	<summary>What is "<em>usermod</em>"?</summary>
+	<br>
+
+	>`usermod` is the tool used to modify user account properties. The `-aG` flags are options for "append" and "groups," indicating that we want to add the user to additional groups without removing them from existing ones. In this case, we are adding the user to the `sudo` group, which is typically associated with administrative or superuser privileges. Replace `your_username` with the actual username of the user you want to grant these privileges to. This command effectively empowers the specified user to perform administrative tasks using the `sudo` command. It's a concise way to enhance a user's access and control on the system.
+	</details>
+
+6. To check if it worked, type `getent group sudo`. Your user should be in the list.
+
+	<details>
+	<summary>What is "<em>getent</em>"?</summary>
+	<br>
+
+	> `getent` means "get entries", so `getent group sudo` means, get information about the group named `sudo`.
+	</details>
 
 
+7. Now we have to add our user to sudoesrs file, so it could use sudo. The safe and correct way to do it is to use `visudo` command. Just type in the terminal `visudo`. Scroll down and after "#User privilege specification" add your user with all privilages
 
+	![visudo](./img/visudo.png)
+
+	- When you do, press "control + x <em>(or ctrl + x on windows)</em>", then press "y" and then press "Enter" to save it.
+
+	<details>
+	<summary>What is "<em>var1=(var2:var3) var4</em> aka ALL=(ALL:ALL) ALL"?</summary>
+	<br>
+
+	`var1` This part specifies from where the user is allowed to execute commands with sudo.
+	- Examples:
+		- <b>localhost</b>: Allows the user to run commands with sudo only on the local machine.<br>
+		`your_username localhost=(ALL:ALL) ALL`<br>
+		- <b>IP Address (e.g., 192.168.0.1)</b>: Allows the user to run commands with sudo only from the machine with the specified IP address.<br>
+		`your_username 192.168.0.1=(ALL:ALL) ALL`<br>
+		- Hostname from the Same Network (e.g., <b>myserver</b>): Allows the user to run commands with sudo only from the machine with the specified hostname on the same network.<br>
+		`your_username myserver=(ALL:ALL) ALL`<br>
+		- Specific Network (e.g., <b>192.168.0.0/24</b>): Allows the user to run commands with sudo only from machines in the specified network range.<br>
+		`your_username 192.168.0.0/24=(ALL:ALL) ALL`<br>
+		- Any Host (using <b>ALL</b>): Allows the user to run commands with sudo from any host.<br>
+		`your_username ALL=(ALL:ALL) ALL`<br>
+		<br>
+
+	`(var2:var3)` (Run As User:Run As Group): This part specifies which user and group the allowed commands can be run as.
+	- Examples:
+		- <b>(ALL:ALL)</b>: Allows the user to run commands with sudo as any user and any group.<br>
+		`user1 ALL=(ALL:ALL) ALL`<br>
+		- <b>(john:admin)</b>: Allows the user to run commands with sudo as the user "john" and the group "admin."
+		`alice ALL=(john:admin) ALL`<br>
+		- <b>(:www-data):</b> Allows the user to run commands with sudo with the group set to "www-data," but as any user.<br>
+		`bob ALL=(:www-data) ALL`<br>
+		- <b>(ALL:admin)</b>: Allows the user to run commands with sudo as any user but with the group set to "admin."<br>
+		`charlie ALL=(ALL:admin) ALL`<br>
+		<b>( : )</b>: Allows the user to run commands with sudo without specifying a particular user or group.<br>
+		`user2 ALL=(:) ALL`<br>
+		<br>
+
+	`var4` This part specifies the commands or operations the user is allowed to run with sudo.
+	- Examples:
+		- <b>/usr/bin/apt-get</b>: Allows the user to run only the apt-get command with sudo.<br>
+		`bob ALL=(ALL:ALL) /usr/bin/apt-get`<br>
+		- <b>/bin/ls:</b> Allows the user to run only the ls command with sudo.<br>
+		`alice ALL=(ALL:ALL) /bin/ls`<br>
+		- <b>/sbin/reboot</b>: Allows the user to run only the reboot command with sudo.<br>
+		`charlie ALL=(ALL:ALL) /sbin/reboot`<br>
+		- <b>/bin/chown, /usr/bin/apt-get</b>: Specifies that John can run the chown command and the apt-get command with sudo.<br>
+		`john ALL=(root:admin) /bin/chown, /usr/bin/apt-get`<br>
+	</details>
+
+## SSH
+
+1. Type `sudo apt install openssh-server` to enable SSH on the server. Enter your password if asked, when prompted, then press `y` to continue the installation.
+
+2. Type `sudo systemctl status ssh` to confirm, that SSH service is running.
+
+	![ssh-status](./img/ssh-status.png)
+3. Type `sudo nano /etc/ssh/sshd_config` to edit the port we gonna use for SSH.
+4. Change `#Port 22` to `Port 4242`.
+	![port-22](./img/port-22.png)
+	![port-4242](./img/port-4242.png)
+5. Press `command + x` (or `ctrl + x` on windows) then press `y` and then `enter` to save it.
+6. Now we need to restart the SSH service so our changes take effect. Type `sudo service ssh restart`.
+7. Type `sudo systemctl status ssh` to see, that everything is correct and we are running on port 4242.
+
+	![port-4242-confirm](./img/port-4242-confirm.png)
+8. If the port did not change, start again from step 2.
+9. Now we need open the `4242` port on VM. So turn off the server and click Settings -> Network -> Port Forwarding.
+
+	![vm-settings](./img/vm-settings.png)
+10. Click the screen button "New rule" and change `Host Port` and `Guest Port` to `4242`.
+
+	![port-forwarding-4242](./img/port-forwarding-4242.png)
+
+11. When you done, save your changes and start the server again. Type `sudo service sshd status` to check if SSH service ir running.
+
+12. Open iTerm terminal (a normal terminal did not work for me) on your main machine and type `ssh your_username@127.0.0.1 -p 4242` or `ssh your_username@localhost -p 4242` to connect to your server via SSH.
+
+# Questions you have to answer during evaluation:
+ - How a virtual machine works.
+ 	- A virtual machine (VM) is like a computer simulator. It's software that acts as a copycat of a physical computer, allowing you to run multiple operating systems on a single actual computer. The main idea is to hide the details of the computer's hardware and create a separate space where different operating systems can do their thing without interfering with each other. What's neat is that you can also decide how much of the computer's resources (like processing power and memory) you want to assign to each virtual machine.
+ - Their choice of operating system.
+	- You can simply say that you chose Debian because, in the subject, it was mentioned to be easier.
+ - The basic differences between Rocky and Debian.
+	- Debian, known for its stability and expansive software repositories (meaning, that Debian has a lot of different programs and apps ready for you to use. It's like a big collection of tools and software that you can easily get and install on your computer when you need them. So, Debian is like a treasure chest full of programs you can choose from for whatever you want to do on your computer.), is a versatile operating system with a strong community and a rich history. It offers a wide range of applications and packages, making it suitable for various computing needs. Debian's reputation for reliability and its open-source nature contribute to its popularity among users seeking a dependable and flexible operating system. In contrast, Rocky Linux serves as a free, open-source substitute for Red Hat Enterprise Linux, emphasizing stability and security for enterprise use. The significance of Red Hat compatibility lies in the fact that many businesses rely on applications and standards specifically designed for Red Hat systems. Choosing Rocky Linux provides a cost-effective way for organizations to maintain compatibility with Red Hat without the associated expenses, making it a practical choice for businesses with a Red Hat-oriented IT environment.
+ - The purpose of virtual machines.
+	- A virtual machine is like a computer inside your computer. It helps you do different things on your computer by creating a special space. This space acts like a separate computer, running its own programs and system. The main idea is to let you use various software or even different operating systems on one computer. For example, you can have a Windows virtual machine on a computer that mostly uses Linux. It's like having different computers in one, making things more flexible and letting you use diverse software without any problems.
+ - If the evaluated student chose Debian: the difference between aptitude and apt, and what APPArmor is.
+	- In Debian Linux, both Aptitude and Apt serve as tools for managing software packages, helping with tasks like installing, upgrading, and removing programs. Aptitude stands out with its text-based interface and advanced features that handle package dependencies and conflicts. On the other hand, Apt, short for "Advanced Package Tool," is a command-line tool known for its user-friendly approach to package management, making tasks like resolving dependencies straightforward. Apt, considered more accessible than its predecessor apt-get, efficiently automates package management for Debian-based systems while offering simplicity in its design.
+	- AppArmor acts as a permissions and access control tool specifically designed for programs or applications on a Linux system. It defines and enforces policies that dictate what resources (like files, directories, and network services) a particular program is allowed to access and what operations it can perform. By setting up these security profiles, AppArmor helps to minimize the potential damage that could occur if a program were compromised or if it unintentionally tries to access or modify sensitive parts of the system. It's an additional layer of security that complements other security measures on a Linux system. Essentially, AppArmor enhances the control over the actions of individual programs, contributing to overall system security.
+ - The student being evaluated must first explain the value and operation of sudo using examples of their choice.
+	- sudo is a command-line tool that acts as a privilege escalation tool in Unix-like operating systems, including Linux. If your user is part of the sudo group and is listed in the sudoers file, you can use sudo to perform administrative tasks or tasks that require elevated privileges. Typical administrative tasks include updating the system, installing or removing software, modifying system configurations, and other actions that regular users don't have permission to do by default. The use of sudo helps maintain security by allowing specific users to temporarily gain superuser privileges for authorized actions, without having to log in as the root user all the time.
+	- Logging in as the root user is discouraged because it grants unrestricted access and control over the entire system. When logged in as root, any command or action, intentional or accidental, can significantly impact the stability and security of the system. It increases the risk of making critical mistakes, such as deleting essential system files or installing malicious software without any barriers. The principle of least privilege recommends avoiding constant root access and instead using tools like sudo to grant elevated privileges only when necessary, promoting a more controlled and secure computing environment.
+ - The student being evaluated must be able to explain to you basically what SSH is and the value of using it.
+	-
 ### Project overview
 - The student being evaluated should explain to you simply:
 	- How a virtual machine works.
@@ -376,6 +504,28 @@ You should be able to explain:<br>
 ### SSH:
 
 ### UFW Firewall:
+
+1. As per pdf documment provided, we have to install UFW. For this, type:<br> `sudo apt-get install ufw -y`
+
+	<details>
+	<summary>What is "<em><b>UFW</b></em>"?</summary>
+
+	> `UFW` <em>(Uncomplicated Firewall)</em> is a firewall management tool for Linux. It is not a standalone firewall but rather a user-friendly interface that simplifies the process of configuring and managing the underlying netfilter firewall, which is part of the Linux kernel.<br>
+	With UFW, users can easily define rules to allow or deny specific types of network traffic, such as allowing traffic on certain ports or blocking traffic from specific IP addresses. UFW translates these user-configured rules into the format understood by the netfilter firewall, making it more accessible for users who may not be familiar with the intricacies of manual firewall configurations using the command line.<br>
+	So, in essence, UFW acts as a convenient layer on top of the Linux netfilter firewall, providing an easier way for users to interact with and control their system's firewall settings.
+	</details>
+
+2. Type `sudo ufw enable` to active UFW.<br><br>
+	![ufw-activate](./img/ufw_activate.png)
+3. Type `sudo ufw status` to check status of the UFW.<br><br>
+	![ufw-status](./img/ufw_status.png)
+4. Now we have to allow incoming connections to SSH service throught the firewall. Type `sudo ufw allow ssh`<br><br>
+	![ufw-enableSSH](./img/UFW_enable_ssh.png)
+5. We also need to open 4242 port, as per subject instructions. Type `sudo ufw allow 4242`<br><br>
+	![ufw-enable4242](./img/UFW_enable_4242.png)
+6.  Type
+	![ufw-status-finish](./img/UFW_status_finish.png)
+
 
 
 ### Password policy:
