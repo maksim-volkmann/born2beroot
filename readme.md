@@ -1,7 +1,7 @@
 # ![logo](https://github.com/maksim-volkmann/42-project-badges/blob/main/badges/born2beroote.png?raw=true)<br>Born2beroot
 
 > [!TIP]
-> To exit the virtual machine and return to your original machine, press the `control` button on Mac and `ctrl` on Windows.
+> To exit the virtual machine and return to your original machine, press the `control` key on Mac and right `ctrl` on Windows.
 
 <!-- $${\color{red}\text{Note: This guide was created using a Mac!}}$$ -->
 
@@ -274,8 +274,8 @@ Download the `debian-xx.x.x-amd64-netinst.iso` file from [here](https://cdimage.
 2. Type `apt-get update`.
 	<details>
 	<summary>What is "<em>apt-get update</em>"?</summary>
-	<br>
-	<em>This command refreshes the local package index, which is essentially a catalog of available software packages. It fetches the latest information about the versions of packages available in the repositories. However, it doesn't make any changes to the actual software on your system.</em><br>
+
+	> <em>This command refreshes the local package index, which is essentially a catalog of available software packages. It fetches the latest information about the versions of packages available in the repositories. However, it doesn't make any changes to the actual software on your system.</em><br>
 	</details>
 3. Type `apt-get upgrade -y` (-y flag means, that you confirm, that additional disk space will be used to install the upgrades).
 
