@@ -278,32 +278,29 @@ Download the `debian-xx.x.x-amd64-netinst.iso` file from [here](https://cdimage.
 	> <em>This command refreshes the local package index, which is essentially a catalog of available software packages. It fetches the latest information about the versions of packages available in the repositories. However, it doesn't make any changes to the actual software on your system.</em><br>
 	</details>
 3. Type `apt-get upgrade -y` (-y flag means, that you confirm, that additional disk space will be used to install the upgrades).
-
 	<details>
 	<summary>What is "<em>apt-get upgrade</em>"?</summary>
-	<br>
-	<em>This command, when executed after apt-get update, looks at the local package index to determine if there are newer versions of the packages currently installed on your system. If it finds newer versions, it then downloads and installs those updates. The upgrade process ensures that your installed software is brought up to the latest available versions.</em>
+
+	> <em>This command, when executed after apt-get update, looks at the local package index to determine if there are newer versions of the packages currently installed on your system. If it finds newer versions, it then downloads and installs those updates. The upgrade process ensures that your installed software is brought up to the latest available versions.</em>
 4. To install sudo, type `apt install sudo`
 	<details>
 	<summary>What is "<em>sudo</em>"?</summary>
 
-	>`sudo` is a tool on your computer that grants you temporary superpowers for specific tasks. It's like having a key to unlock special doors when needed. When you use `sudo`, you're saying, "I need to do something important, and I have permission." Imagine it as having a special key that fits only one lock—the door to that particular task. Once you've completed that task, the temporary key disappears, ensuring that regular users can't accidentally or intentionally make big changes. These permissions are defined in a rule book called "/etc/sudoers." By default, the first person who sets up the computer has these permissions, and others can be given them later. So, `sudo` is a security measure, akin to having a special key that opens certain doors only when necessary, and only for those who should have access.
+	> <em>`sudo` is a tool on your computer that grants you temporary superpowers for specific tasks. It's like having a key to unlock special doors when needed. When you use `sudo`, you're saying, "I need to do something important, and I have permission." Imagine it as having a special key that fits only one lock—the door to that particular task. Once you've completed that task, the temporary key disappears, ensuring that regular users can't accidentally or intentionally make big changes. These permissions are defined in a rule book called "/etc/sudoers." By default, the first person who sets up the computer has these permissions, and others can be given them later. So, `sudo` is a security measure, akin to having a special key that opens certain doors only when necessary, and only for those who should have access.</em>
 	</details>
 
 5. Type `usermod -aG sudo your_username`.
 
 	<details>
 	<summary>What is "<em>usermod</em>"?</summary>
-	<br>
 
-	>`usermod` is the tool used to modify user account properties. The `-aG` flags are options for "append" and "groups," indicating that we want to add the user to additional groups without removing them from existing ones. In this case, we are adding the user to the `sudo` group, which is typically associated with administrative or superuser privileges. Replace `your_username` with the actual username of the user you want to grant these privileges to. This command effectively empowers the specified user to perform administrative tasks using the `sudo` command. It's a concise way to enhance a user's access and control on the system.
+	> <em> `usermod` is the tool used to modify user account properties. The `-aG` flags are options for "append" and "groups," indicating that we want to add the user to additional groups without removing them from existing ones. In this case, we are adding the user to the `sudo` group, which is typically associated with administrative or superuser privileges. Replace `your_username` with the actual username of the user you want to grant these privileges to. This command effectively empowers the specified user to perform administrative tasks using the `sudo` command. It's a concise way to enhance a user's access and control on the system.</em>
 	</details>
 
 6. To check if it worked, type `getent group sudo`. Your user should be in the list.
 
 	<details>
 	<summary>What is "<em>getent</em>"?</summary>
-	<br>
 
 	> `getent` means "get entries", so `getent group sudo` means, get information about the group named `sudo`.
 	</details>
@@ -319,7 +316,7 @@ Download the `debian-xx.x.x-amd64-netinst.iso` file from [here](https://cdimage.
 	<summary>What is "<em>var1=(var2:var3) var4</em> aka ALL=(ALL:ALL) ALL"?</summary>
 	<br>
 
-	`var1` This part specifies from where the user is allowed to execute commands with sudo.
+	> `var1` This part specifies from where the user is allowed to execute commands with sudo.
 	- Examples:
 		- <b>localhost</b>: Allows the user to run commands with sudo only on the local machine.<br>
 		`your_username localhost=(ALL:ALL) ALL`<br>
