@@ -356,7 +356,7 @@ Download the `debian-xx.x.x-amd64-netinst.iso` file from [here](https://cdimage.
 
 ## SSH
 
-1. Type `sudo apt install openssh-server` to enable SSH on the server. Enter your password if asked, when prompted, then press `y` to continue the installation.
+1. Type `sudo apt install openssh-server` to enable SSH on the server. Enter your password if asked (you will be asked a passoword, if you not not logged in as root), when prompted, then press `y` to continue the installation.
 
 2. Type `sudo systemctl status ssh` to confirm, that SSH service is running.
 
@@ -402,26 +402,8 @@ Download the `debian-xx.x.x-amd64-netinst.iso` file from [here](https://cdimage.
 	![ufw-enableSSH](./img/UFW_enable_ssh.png)
 5. We also need to open 4242 port, as per subject instructions. Type `sudo ufw allow 4242`<br><br>
 	![ufw-enable4242](./img/UFW_enable_4242.png)
-6.  Type
+6. Type `sudo ufw status` to check the opened ports.
 	![ufw-status-finish](./img/UFW_status_finish.png)
-
-# Questions you have to answer during evaluation:
- - How a virtual machine works.
- 	- A virtual machine (VM) is like a computer simulator. It's software that acts as a copycat of a physical computer, allowing you to run multiple operating systems on a single actual computer. The main idea is to hide the details of the computer's hardware and create a separate space where different operating systems can do their thing without interfering with each other. What's neat is that you can also decide how much of the computer's resources (like processing power and memory) you want to assign to each virtual machine.
- - Their choice of operating system.
-	- You can simply say that you chose Debian because, in the subject, it was mentioned to be easier.
- - The basic differences between Rocky and Debian.
-	- Debian, known for its stability and expansive software repositories (meaning, that Debian has a lot of different programs and apps ready for you to use. It's like a big collection of tools and software that you can easily get and install on your computer when you need them. So, Debian is like a treasure chest full of programs you can choose from for whatever you want to do on your computer.), is a versatile operating system with a strong community and a rich history. It offers a wide range of applications and packages, making it suitable for various computing needs. Debian's reputation for reliability and its open-source nature contribute to its popularity among users seeking a dependable and flexible operating system. In contrast, Rocky Linux serves as a free, open-source substitute for Red Hat Enterprise Linux, emphasizing stability and security for enterprise use. The significance of Red Hat compatibility lies in the fact that many businesses rely on applications and standards specifically designed for Red Hat systems. Choosing Rocky Linux provides a cost-effective way for organizations to maintain compatibility with Red Hat without the associated expenses, making it a practical choice for businesses with a Red Hat-oriented IT environment.
- - The purpose of virtual machines.
-	- A virtual machine is like a computer inside your computer. It helps you do different things on your computer by creating a special space. This space acts like a separate computer, running its own programs and system. The main idea is to let you use various software or even different operating systems on one computer. For example, you can have a Windows virtual machine on a computer that mostly uses Linux. It's like having different computers in one, making things more flexible and letting you use diverse software without any problems.
- - If the evaluated student chose Debian: the difference between aptitude and apt, and what APPArmor is.
-	- In Debian Linux, both Aptitude and Apt serve as tools for managing software packages, helping with tasks like installing, upgrading, and removing programs. Aptitude stands out with its text-based interface and advanced features that handle package dependencies and conflicts. On the other hand, Apt, short for "Advanced Package Tool," is a command-line tool known for its user-friendly approach to package management, making tasks like resolving dependencies straightforward. Apt, considered more accessible than its predecessor apt-get, efficiently automates package management for Debian-based systems while offering simplicity in its design.
-	- AppArmor acts as a permissions and access control tool specifically designed for programs or applications on a Linux system. It defines and enforces policies that dictate what resources (like files, directories, and network services) a particular program is allowed to access and what operations it can perform. By setting up these security profiles, AppArmor helps to minimize the potential damage that could occur if a program were compromised or if it unintentionally tries to access or modify sensitive parts of the system. It's an additional layer of security that complements other security measures on a Linux system. Essentially, AppArmor enhances the control over the actions of individual programs, contributing to overall system security.
- - The student being evaluated must first explain the value and operation of sudo using examples of their choice.
-	- sudo is a command-line tool that acts as a privilege escalation tool in Unix-like operating systems, including Linux. If your user is part of the sudo group and is listed in the sudoers file, you can use sudo to perform administrative tasks or tasks that require elevated privileges. Typical administrative tasks include updating the system, installing or removing software, modifying system configurations, and other actions that regular users don't have permission to do by default. The use of sudo helps maintain security by allowing specific users to temporarily gain superuser privileges for authorized actions, without having to log in as the root user all the time.
-	- Logging in as the root user is discouraged because it grants unrestricted access and control over the entire system. When logged in as root, any command or action, intentional or accidental, can significantly impact the stability and security of the system. It increases the risk of making critical mistakes, such as deleting essential system files or installing malicious software without any barriers. The principle of least privilege recommends avoiding constant root access and instead using tools like sudo to grant elevated privileges only when necessary, promoting a more controlled and secure computing environment.
- - The student being evaluated must be able to explain to you basically what SSH is and the value of using it.
-	-
 
 ### Password policy:
 
@@ -448,7 +430,73 @@ For other requrements we are using [pam_pwquality](https://manpages.debian.org/t
 To install: `sudo apt-get install libpam-pwquality`<br>
 To change settings: `sudo nano /etc/pam.d/common-password`<br>
 Line to eddit: `password 			requisite					pam_pwquality.so retry=3`<br>
-Change to: `password requisite pam_pwquality.so retry=3 minlen=10 ucredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root`<br>
+Change to: `password requisite pam_pwquality.so retry=3 minlen=10 ucredit=-1 dcredit=-1 lcredit=-1 maxrepeat=3 difok=7 enforce_for_root`<br>
+
+<details>
+<summary>What is "<em><b>minlen</b></em>"?</summary>
+
+> `minlen=N` - The minimum acceptable size for the new password (plus one if credits are not disabled which is the default). In addition to the number of characters in the new password, credit (of +1 in length) is given for each different kind of character (other, upper, lower and digit). The default for this parameter is 9 . Note that there is a pair of length limits also in Cracklib, which is used for dictionary checking, a "way too short" limit of 4 which is hard coded in and a build time defined limit (6) that will be checked without reference to minlen.
+</details>
+
+<details>
+<summary>What is "<em><b>dcredit</b></em>"?</summary>
+
+> `dcredit=N` - (N >= 0) This is the maximum credit for having digits in the new password. If you have less than or N digits, each digit will count +1 towards meeting the current minlen value. The default for dcredit is 1 which is the recommended value for minlen less than 10.<br>
+(N < 0) This is the minimum number of digits that must be met for a new password.
+</details>
+
+<details>
+<summary>What is "<em><b>ucredit</b></em>"?</summary>
+
+> `ucredit=N` - (N >= 0) This is the maximum credit for having upper case letters in the new password. If you have less than or N upper case letters each letter will count +1 towards meeting the current minlen value. The default for ucredit is 1 which is the recommended value for minlen less than 10.<br>
+(N < 0) This is the minimum number of upper case letters that must be met for a new password.
+</details>
+
+<details>
+<summary>What is "<em><b>lcredit</b></em>"?</summary>
+
+> `lcredit=N` - (N >= 0) This is the maximum credit for having lower case letters in the new password. If you have less than or N lower case letters, each letter will count +1 towards meeting the current minlen value. The default for lcredit is 1 which is the recommended value for minlen less than 10.<br>
+(N < 0) This is the minimum number of lower case letters that must be met for a new password.
+</details>
+
+<details>
+<summary>What is "<em><b>maxrepeat</b></em>"?</summary>
+
+> `maxrepeat=N` - Reject passwords which contain more than N same consecutive characters. The default is 0 which means that this check is disabled.
+</details>
+
+<details>
+<summary>What is "<em><b>difok</b></em>"?</summary>
+
+> `difok=N` - This argument will change the default of 5 for the number of changes in the new password from the old password.
+</details>
+
+<details>
+<summary>What is "<em><b>enforce_for_root</b></em>"?</summary>
+
+> `enforce_for_root` - The module will return error on failed check even if the user changing the password is root. This option is off by default which means that just the message about the failed check is printed but root can change the password anyway.
+</details>
+
+
+# Questions you have to answer during evaluation:
+ - How a virtual machine works.
+ 	- A virtual machine (VM) is like a computer simulator. It's software that acts as a copycat of a physical computer, allowing you to run multiple operating systems on a single actual computer. The main idea is to hide the details of the computer's hardware and create a separate space where different operating systems can do their thing without interfering with each other. What's neat is that you can also decide how much of the computer's resources (like processing power and memory) you want to assign to each virtual machine.
+ - Their choice of operating system.
+	- You can simply say that you chose Debian because, in the subject, it was mentioned to be easier.
+ - The basic differences between Rocky and Debian.
+	- Debian, known for its stability and expansive software repositories (meaning, that Debian has a lot of different programs and apps ready for you to use. It's like a big collection of tools and software that you can easily get and install on your computer when you need them. So, Debian is like a treasure chest full of programs you can choose from for whatever you want to do on your computer.), is a versatile operating system with a strong community and a rich history. It offers a wide range of applications and packages, making it suitable for various computing needs. Debian's reputation for reliability and its open-source nature contribute to its popularity among users seeking a dependable and flexible operating system. In contrast, Rocky Linux serves as a free, open-source substitute for Red Hat Enterprise Linux, emphasizing stability and security for enterprise use. The significance of Red Hat compatibility lies in the fact that many businesses rely on applications and standards specifically designed for Red Hat systems. Choosing Rocky Linux provides a cost-effective way for organizations to maintain compatibility with Red Hat without the associated expenses, making it a practical choice for businesses with a Red Hat-oriented IT environment.
+ - The purpose of virtual machines.
+	- A virtual machine is like a computer inside your computer. It helps you do different things on your computer by creating a special space. This space acts like a separate computer, running its own programs and system. The main idea is to let you use various software or even different operating systems on one computer. For example, you can have a Windows virtual machine on a computer that mostly uses Linux. It's like having different computers in one, making things more flexible and letting you use diverse software without any problems.
+ - If the evaluated student chose Debian: the difference between aptitude and apt, and what APPArmor is.
+	- In Debian Linux, both Aptitude and Apt serve as tools for managing software packages, helping with tasks like installing, upgrading, and removing programs. Aptitude stands out with its text-based interface and advanced features that handle package dependencies and conflicts. On the other hand, Apt, short for "Advanced Package Tool," is a command-line tool known for its user-friendly approach to package management, making tasks like resolving dependencies straightforward. Apt, considered more accessible than its predecessor apt-get, efficiently automates package management for Debian-based systems while offering simplicity in its design.
+	- AppArmor acts as a permissions and access control tool specifically designed for programs or applications on a Linux system. It defines and enforces policies that dictate what resources (like files, directories, and network services) a particular program is allowed to access and what operations it can perform. By setting up these security profiles, AppArmor helps to minimize the potential damage that could occur if a program were compromised or if it unintentionally tries to access or modify sensitive parts of the system. It's an additional layer of security that complements other security measures on a Linux system. Essentially, AppArmor enhances the control over the actions of individual programs, contributing to overall system security.
+ - The student being evaluated must first explain the value and operation of sudo using examples of their choice.
+	- sudo is a command-line tool that acts as a privilege escalation tool in Unix-like operating systems, including Linux. If your user is part of the sudo group and is listed in the sudoers file, you can use sudo to perform administrative tasks or tasks that require elevated privileges. Typical administrative tasks include updating the system, installing or removing software, modifying system configurations, and other actions that regular users don't have permission to do by default. The use of sudo helps maintain security by allowing specific users to temporarily gain superuser privileges for authorized actions, without having to log in as the root user all the time.
+	- Logging in as the root user is discouraged because it grants unrestricted access and control over the entire system. When logged in as root, any command or action, intentional or accidental, can significantly impact the stability and security of the system. It increases the risk of making critical mistakes, such as deleting essential system files or installing malicious software without any barriers. The principle of least privilege recommends avoiding constant root access and instead using tools like sudo to grant elevated privileges only when necessary, promoting a more controlled and secure computing environment.
+ - The student being evaluated must be able to explain to you basically what SSH is and the value of using it.
+	-
+
+
 
 ### Signature
 
