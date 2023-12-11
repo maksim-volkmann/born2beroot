@@ -500,8 +500,9 @@ Change to: `password requisite pam_pwquality.so retry=3 minlen=10 ucredit=-1 dcr
 
 ### CRON and SCRIPT
 
-```
+Is hard to explain, what every script does, so you have to figure it out this part yourself. You can use this as a reference or you can use it to understand, how we got the results we want.
 
+```
 #!/bin/bash
 arc=$(uname -a)
 pcpu=$(grep "physical id" /proc/cpuinfo | sort | uniq | wc -l)
@@ -532,9 +533,64 @@ wall "  #Architecture: $arc
         #User log: $ulog
         #Network: IP $ip ($mac)
         #Sudo: $cmds cmd"
-
 ```
 
 ### Signature
 
 1. The only thing you have to upload is `signature.txt` file.
+
+
+### a
+
+password        requisite                       pam_pwquality.so retry=3 minlen=10 dcredit=-1 ucredit=-1 lcredit=-1 maxrepeat>
+
+uname -a
+
+sudo ufw status
+sudo service ssh status
+
+getent group sudo
+getent group user42
+sudo adduser username
+sudo groupadd evaluating
+sudo usermod -aG evaluating username
+sudo chage -l username - check password expire rules
+
+sudo nano /etc/pam.d/common-password
+sudo nano /etc/login.defs
+
+sudo hostnamectl set-hostname new_hostname
+sudo nano /etc/hosts - change current hostname to new hostname
+sudo reboot
+lsblk
+
+sudo dpkg -l | grep sudo – to show that sudo is installed
+sudo usermod -aG sudo username
+sudo visudo
+sudo nano /var/log/sudo/sudo.log
+
+sudo ufw status numbered
+sudo ufw allow 8080
+sudo ufw delete allow 8080
+
+sudo service ssh status
+ssh username@127.0.0.1 -p 4242
+
+sudo crontab -u root -e
+sudo /usr/local/bin/monitoring.sh
+sudo systemctl disable cron
+sudo systemctl enable cron
+
+cut -d: -f1 /etc/passwd - show all users
+
+	difok = 7 This argument will change the default of 1 for the number of changes in the new password from the old password.
+	minlen = 10
+	dcredit = -1 digits
+	ucredit = -1 uppercase
+	lcredit = -1 loweercase
+	maxrepeat = 3 Reject passwords which contain more than N same consecutive characters.
+usercheck = 1 if contains the username
+enforcing = 1 rejects the password if it fails
+	retry = 3 times you can try
+	enforce_for_root
+
