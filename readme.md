@@ -257,9 +257,9 @@ Download the `debian-xx.x.x-amd64-netinst.iso` file from [here](https://cdimage.
 ![partition_selection](./img/partition_104.png)
 121. Select `Yes`
 ![partition_selection](./img/partition_105.png)
-122. Here you have to install GRUB boot loader. Select available drive.<br><br>
+122. Here you have to install GRUB boot loader. Select available drive.
 ![partition_selection](./img/partition_106.png)
-123. Select `Continue` to finish the installation.<br><br>
+123. Select `Continue` to finish the installation.
 ![partition_selection](./img/partition_107.png)
 124. Log in to the machine and write the command: `lsblk`. Partition size is not indentical, but we don't care about size, we only care about the structure.
 ![partition_selection](./img/partition_108.png)
