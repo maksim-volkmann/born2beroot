@@ -32,7 +32,9 @@ Download the `debian-xx.x.x-amd64-netinst.iso` file from [here](https://cdimage.
 9. Select your location. If your location is not here, just select `other`, the continent and you will find it!
 ![location](./img/born2beroot_09.png)
 10. This instruction is from subject.pdf file, so name your hostname accordingly.<br>
- > The hostname of your virtual machine must be your login ending with 42 (e.g., you_user_name42). You will have to modify this hostname during your evaluation.
+
+> The hostname of your virtual machine must be your login ending with 42 (e.g., you_user_name42). You will have to modify this hostname during your evaluation.
+
 ![hostname](./img/born2beroot_11.png)
 11. Skip the domain name.
 ![domain_name](./img/born2beroot_12.png)
