@@ -14,13 +14,9 @@ Download the `debian-xx.x.x-amd64-netinst.iso` file from [here](https://cdimage.
 
 
 1. Create VM for your project inside the VirtualBox.
-
 ![install](./img/born2beroot_01.png)
-
-2. Name your VM anything you want, and for the `Folder`: field, select the `goinfre` folder. It will automatically choose your user's folder. You have to do this because every student gets 10GB of memory on the server, and the goinfre folder uses local memory, which is necessary as we require more than 10GB. Leave `ISO Image` empty.<br>
-
+2. Name your VM anything you want, and for the `Folder`: field, select the `goinfre` folder. It will automatically choose your user's folder. You have to do this because every student gets 10GB of memory on the server, and the goinfre folder uses local memory, which is necessary as we require more than 10GB. Leave `ISO Image` empty.<br
 ![select](./img/born2beroot_02_f.png)
-
 3. Select 1GB of RAM (it should be enough)
 ![memory](./img/born2beroot_03.png)
 4. Select 30.8 GB for the simple BONUS part where we are going to set up partitions, and leave the VDI as the hard disk type. And press `Finish`.
