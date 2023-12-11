@@ -14,7 +14,7 @@ Download the `debian-xx.x.x-amd64-netinst.iso` file from [here](https://cdimage.
 
 
 1. Create VM for your project inside the VirtualBox.
-![install](./img/born2beroot_01.png)
+<!-- ![install](./img/born2beroot_01.png) -->
 
 <img src="./img/born2beroot_01.png" alt="install" width="700" />
 
