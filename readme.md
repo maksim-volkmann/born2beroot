@@ -1,6 +1,6 @@
 # ![logo](https://github.com/maksim-volkmann/42-project-badges/blob/main/badges/born2beroote.png?raw=true)<br>Born2beroot
 
-$${\color{red}\text{Please note that this tutorial is incomplete and may contain missing information!}}$$
+$${\color{red}\text{Tutorial is incomplete. Still working on it!}}$$
 
 
 > [!TIP]
