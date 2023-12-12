@@ -3,7 +3,9 @@
 > [!TIP]
 > To exit the virtual machine and return to your original machine, press the `control` key on Mac and right `ctrl` on Windows.
 
-<!-- $${\color{red}\text{Note: This guide was created using a Mac!}}$$ -->
+> [!NOTE]
+> To paste code from your machine to a virtual machine (VM), you can connect to the VM using Secure Shell (SSH).
+> Once connected, you will be able to copy and paste text between your machine and the VM.
 
 ## Mandatory part
 
@@ -353,6 +355,20 @@ Download the `debian-xx.x.x-amd64-netinst.iso` file from [here](https://cdimage.
 		- <b>/bin/chown, /usr/bin/apt-get</b>: Specifies that John can run the chown command and the apt-get command with sudo.<br>
 		`john ALL=(root:admin) /bin/chown, /usr/bin/apt-get`<br>
 	</details>
+
+8. Also, we need to add strong configuration for your sudo group. Type `sudo nano /etc/sudoers` to open sudoers file. Add the following code like in example:
+
+```
+	Defaults        env_reset
+	Defaults        mail_badpass
+	Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:>
+	Defaults        badpass_message="Wrong password, please try again!"
+	Defaults        passwd_tries=3
+	Defaults        logfile="/var/log/sudo/sudo.log"
+	Defaults        log_input, log_output
+	Defaults        requiretty
+```
+![visudo](./img/sudoers_sudo_rules.png)
 
 ## SSH
 
