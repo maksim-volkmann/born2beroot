@@ -637,7 +637,6 @@ enforcing = 1 rejects the password if it fails
 - If the evaluated student chose Debian: the difference between aptitude and apt, and what APPArmor is. During the defense, a script must display information all every 10 minutes. Its operation will be checked in detail later.
 
 ## Simple setup
-- Remember: Whenever you need help checking something, the student being evaluated should be able to help you.
 - Ensure that the machine does not have a graphical environment at launch. A password will be requested before attempting to connect to this machine. Finally, connect with a user with the help of the student being evaluated. This user must not be root.
 Pay attention to the password chosen, it must follow the rules imposed in the subject.
 - Check that the UFW service is started with the help of the evaluator.
@@ -645,7 +644,6 @@ Pay attention to the password chosen, it must follow the rules imposed in the su
 - Check that the chosen operating system is Debian or Rocky with the help of the evaluator.
 
 ## User
-- Remember: Whenever you need help checking something, the student being evaluated should be able to help you.
 - The subject requests that a user with the login of the student being evaluated is present on the virtual machine. Check that it has been added and that it belongs to the "sudo" and "user42" groups.
 - Make sure the rules imposed in the subject concerning the password policy have been put in place by following the following steps.
 - First, create a new user. Assign it a password of your choice, respecting the subject rules. The student being evaluated must now explain to you how they were able to set up the rules requested in the subject on their virtual machine.
@@ -668,7 +666,6 @@ Pay attention to the password chosen, it must follow the rules imposed in the su
 - Verify that the "/var/log/sudo/" folder exists and has at least one file. Check the contents of the files in this folder, You should see a history of the commands used with sudo. Finally, try to run a command via sudo. See if the file (s) in the "/var/log/sudo/" folder have been updated.
 
 ## UFW / Firewalld
-
 - Check that the "UFW" (or "Firewalld" for rocky) program is properly installed on the virtual machine.
 - Check that it is working properly.
 - The student being evaluated should explain to you basically what UFW (or Firewalld) is and the value of using it.
@@ -684,8 +681,7 @@ Pay attention to the password chosen, it must follow the rules imposed in the su
 - The student being evaluated should help you use SSH in order to log in with the newly created user. To do this, you can use a key or a simple password. It will depend on the student being evaluated. Of course, you have to make sure that you cannot use SSH with the "root" user as stated in the subject.
 
 ## Script monitoring
-
-- The student being evaluated should explain to you simply:
+The student being evaluated should explain to you simply:
 - How their script works by showing you the code.
 - What "cron" is.
 - How the student being evaluated set up their script so that it runs every 10 minutes from when the server starts. Once the correct functioning of the script has been verified, the student being evaluated should ensure that this script runs every minute.
