@@ -477,6 +477,10 @@ Change to: `password requisite pam_pwquality.so retry=3 minlen=10 ucredit=-1 dcr
 > `enforce_for_root` - The module will return error on failed check even if the user changing the password is root. This option is off by default which means that just the message about the failed check is printed but root can change the password anyway.
 </details>
 
+> [!CAUTION]
+> For users you created before, you need to change the password policy manualy!
+
+To do that, type `chage -M 30 -I 2 -W 7 root` and `chage -M 30 -I 2 -W 7 your_intra_username`
 
 # Questions you have to answer during evaluation:
  - How a virtual machine works.
