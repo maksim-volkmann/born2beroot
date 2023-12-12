@@ -3,10 +3,10 @@
 $${\color{red}\text{Tutorial is incomplete. Still working on it!}}$$
 
 
-> [!TIP]
+> [!NOTE]
 > To exit the virtual machine and return to your original machine, press the `control` key on Mac and right `ctrl` on Windows.
 
-> [!NOTE]
+> [!TIP]
 > To paste code from your machine to a virtual machine (VM), you can connect to the VM using Secure Shell (SSH).
 > Once connected, you will be able to copy and paste text between your machine and the VM.
 
