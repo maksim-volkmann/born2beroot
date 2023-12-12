@@ -1,5 +1,7 @@
 # ![logo](https://github.com/maksim-volkmann/42-project-badges/blob/main/badges/born2beroote.png?raw=true)<br>Born2beroot
 
+# Please note that this tutorial is incomplete and may contain missing!
+
 > [!TIP]
 > To exit the virtual machine and return to your original machine, press the `control` key on Mac and right `ctrl` on Windows.
 
