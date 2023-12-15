@@ -10,7 +10,11 @@ $${\color{red}\text{Tutorial is incomplete. Still working on it!}}$$
 > To paste code from your machine to a virtual machine (VM), you can connect to the VM using Secure Shell (SSH).
 > Once connected, you will be able to copy and paste text between your machine and the VM.
 
-## Mandatory part
+## Menu
+* [Partitioning](#Partitioning)
+* [SUDO](#SUDO)
+
+## Partitioning
 
 `You must choose as an operating system either the latest stable version of Debian (no testing/unstable), or the latest stable version of Rocky. Debian is highly recommended if you are new to system administration.`
 In this example, we are going to use Debian because it's easier.
