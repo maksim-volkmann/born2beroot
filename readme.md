@@ -552,7 +552,7 @@ wall "  #Architecture: $arc
 
 ## Signature
 
-1. The only thing you have to upload is `signature.txt` file.
+1. The only thing you have to upload is `signature.txt` file. In that file, we need to put our server signature, to do that, go to your server folder, where you installed the server, it should be something like: `~/goinfre/your_server_name/your_server_name.vdi`, and type `shasum your_server_name.vdi`
 
 
 ## Questions you have to answer during evaluation:
