@@ -14,6 +14,10 @@ $${\color{red}\text{Tutorial is incomplete. Still working on it!}}$$
 * [Partitioning](#Partitioning)
 * [SUDO](#SUDO)
 * [UFW](#UFW)
+* [Password policy](#Password-policy)
+* [Signature](#Signature)
+* [Questions you have to answer during evaluation](#Questions-you-have-to-answer-during-evaluation)
+* [Evaluation sheet](#Evaluation-sheet)
 
 
 ## Partitioning
@@ -430,7 +434,7 @@ Download the `debian-xx.x.x-amd64-netinst.iso` file from [here](https://cdimage.
 6. Type `sudo ufw status` to check the opened ports.
 	![ufw-status-finish](./img/UFW_status_finish.png)
 
-### Password policy:
+## Password policy
 
 Requirements from the subject:
 
@@ -452,8 +456,8 @@ Change the Password aging controls:<br>
 `sudo reboot` to save changes.<br>
 
 For other requrements we are using [pam_pwquality](https://manpages.debian.org/testing/libpam-pwquality/pam_pwquality.8.en.html).<br>
-To install: `sudo apt-get install libpam-pwquality`<br>
-To change settings: `sudo nano /etc/pam.d/common-password`<br>
+1. First install: `sudo apt-get install libpam-pwquality`<br>
+2. We need to change settings in the settings file. Type: `sudo nano /etc/pam.d/common-password`<br>
 Line to eddit: `password 			requisite					pam_pwquality.so retry=3`<br>
 Change to: `password requisite pam_pwquality.so retry=3 minlen=10 ucredit=-1 dcredit=-1 lcredit=-1 maxrepeat=3 difok=7 enforce_for_root`<br>
 
@@ -507,27 +511,9 @@ Change to: `password requisite pam_pwquality.so retry=3 minlen=10 ucredit=-1 dcr
 
 To do that, type `chage -M 30 -I 2 -W 7 root` and `chage -M 30 -I 2 -W 7 your_intra_username`
 
-# Questions you have to answer during evaluation:
- - How a virtual machine works.
- 	- A virtual machine (VM) is like a computer simulator. It's software that acts as a copycat of a physical computer, allowing you to run multiple operating systems on a single actual computer. The main idea is to hide the details of the computer's hardware and create a separate space where different operating systems can do their thing without interfering with each other. What's neat is that you can also decide how much of the computer's resources (like processing power and memory) you want to assign to each virtual machine.
- - Their choice of operating system.
-	- You can simply say that you chose Debian because, in the subject, it was mentioned to be easier.
- - The basic differences between Rocky and Debian.
-	- Debian, known for its stability and expansive software repositories (meaning, that Debian has a lot of different programs and apps ready for you to use. It's like a big collection of tools and software that you can easily get and install on your computer when you need them. So, Debian is like a treasure chest full of programs you can choose from for whatever you want to do on your computer.), is a versatile operating system with a strong community and a rich history. It offers a wide range of applications and packages, making it suitable for various computing needs. Debian's reputation for reliability and its open-source nature contribute to its popularity among users seeking a dependable and flexible operating system. In contrast, Rocky Linux serves as a free, open-source substitute for Red Hat Enterprise Linux, emphasizing stability and security for enterprise use. The significance of Red Hat compatibility lies in the fact that many businesses rely on applications and standards specifically designed for Red Hat systems. Choosing Rocky Linux provides a cost-effective way for organizations to maintain compatibility with Red Hat without the associated expenses, making it a practical choice for businesses with a Red Hat-oriented IT environment.
- - The purpose of virtual machines.
-	- A virtual machine is like a computer inside your computer. It helps you do different things on your computer by creating a special space. This space acts like a separate computer, running its own programs and system. The main idea is to let you use various software or even different operating systems on one computer. For example, you can have a Windows virtual machine on a computer that mostly uses Linux. It's like having different computers in one, making things more flexible and letting you use diverse software without any problems.
- - If the evaluated student chose Debian: the difference between aptitude and apt, and what APPArmor is.
-	- In Debian Linux, both Aptitude and Apt serve as tools for managing software packages, helping with tasks like installing, upgrading, and removing programs. Aptitude stands out with its text-based interface and advanced features that handle package dependencies and conflicts. On the other hand, Apt, short for "Advanced Package Tool," is a command-line tool known for its user-friendly approach to package management, making tasks like resolving dependencies straightforward. Apt, considered more accessible than its predecessor apt-get, efficiently automates package management for Debian-based systems while offering simplicity in its design.
-	- AppArmor acts as a permissions and access control tool specifically designed for programs or applications on a Linux system. It defines and enforces policies that dictate what resources (like files, directories, and network services) a particular program is allowed to access and what operations it can perform. By setting up these security profiles, AppArmor helps to minimize the potential damage that could occur if a program were compromised or if it unintentionally tries to access or modify sensitive parts of the system. It's an additional layer of security that complements other security measures on a Linux system. Essentially, AppArmor enhances the control over the actions of individual programs, contributing to overall system security.
- - The student being evaluated must first explain the value and operation of sudo using examples of their choice.
-	- sudo is a command-line tool that acts as a privilege escalation tool in Unix-like operating systems, including Linux. If your user is part of the sudo group and is listed in the sudoers file, you can use sudo to perform administrative tasks or tasks that require elevated privileges. Typical administrative tasks include updating the system, installing or removing software, modifying system configurations, and other actions that regular users don't have permission to do by default. The use of sudo helps maintain security by allowing specific users to temporarily gain superuser privileges for authorized actions, without having to log in as the root user all the time.
-	- Logging in as the root user is discouraged because it grants unrestricted access and control over the entire system. When logged in as root, any command or action, intentional or accidental, can significantly impact the stability and security of the system. It increases the risk of making critical mistakes, such as deleting essential system files or installing malicious software without any barriers. The principle of least privilege recommends avoiding constant root access and instead using tools like sudo to grant elevated privileges only when necessary, promoting a more controlled and secure computing environment.
- - The student being evaluated must be able to explain to you basically what SSH is and the value of using it.
-	-
+To check if user have correct password policies, type: `chage -l username`.
 
-
-
-### CRON and SCRIPT
+## CRON and SCRIPT
 
 Is hard to explain, what every script does, so you have to figure it out this part yourself. You can use this as a reference or you can use it to understand, how we got the results we want.
 
@@ -564,64 +550,29 @@ wall "  #Architecture: $arc
         #Sudo: $cmds cmd"
 ```
 
-### Signature
+## Signature
 
 1. The only thing you have to upload is `signature.txt` file.
 
 
-### aaaaaaa
+## Questions you have to answer during evaluation:
+ - How a virtual machine works.
+ 	- A virtual machine (VM) is like a computer simulator. It's software that acts as a copycat of a physical computer, allowing you to run multiple operating systems on a single actual computer. The main idea is to hide the details of the computer's hardware and create a separate space where different operating systems can do their thing without interfering with each other. What's neat is that you can also decide how much of the computer's resources (like processing power and memory) you want to assign to each virtual machine.
+ - Their choice of operating system.
+	- You can simply say that you chose Debian because, in the subject, it was mentioned to be easier.
+ - The basic differences between Rocky and Debian.
+	- Debian, known for its stability and expansive software repositories (meaning, that Debian has a lot of different programs and apps ready for you to use. It's like a big collection of tools and software that you can easily get and install on your computer when you need them. So, Debian is like a treasure chest full of programs you can choose from for whatever you want to do on your computer.), is a versatile operating system with a strong community and a rich history. It offers a wide range of applications and packages, making it suitable for various computing needs. Debian's reputation for reliability and its open-source nature contribute to its popularity among users seeking a dependable and flexible operating system. In contrast, Rocky Linux serves as a free, open-source substitute for Red Hat Enterprise Linux, emphasizing stability and security for enterprise use. The significance of Red Hat compatibility lies in the fact that many businesses rely on applications and standards specifically designed for Red Hat systems. Choosing Rocky Linux provides a cost-effective way for organizations to maintain compatibility with Red Hat without the associated expenses, making it a practical choice for businesses with a Red Hat-oriented IT environment.
+ - The purpose of virtual machines.
+	- A virtual machine is like a computer inside your computer. It helps you do different things on your computer by creating a special space. This space acts like a separate computer, running its own programs and system. The main idea is to let you use various software or even different operating systems on one computer. For example, you can have a Windows virtual machine on a computer that mostly uses Linux. It's like having different computers in one, making things more flexible and letting you use diverse software without any problems.
+ - If the evaluated student chose Debian: the difference between aptitude and apt, and what APPArmor is.
+	- In Debian Linux, both Aptitude and Apt serve as tools for managing software packages, helping with tasks like installing, upgrading, and removing programs. Aptitude stands out with its text-based interface and advanced features that handle package dependencies and conflicts. On the other hand, Apt, short for "Advanced Package Tool," is a command-line tool known for its user-friendly approach to package management, making tasks like resolving dependencies straightforward. Apt, considered more accessible than its predecessor apt-get, efficiently automates package management for Debian-based systems while offering simplicity in its design.
+	- AppArmor acts as a permissions and access control tool specifically designed for programs or applications on a Linux system. It defines and enforces policies that dictate what resources (like files, directories, and network services) a particular program is allowed to access and what operations it can perform. By setting up these security profiles, AppArmor helps to minimize the potential damage that could occur if a program were compromised or if it unintentionally tries to access or modify sensitive parts of the system. It's an additional layer of security that complements other security measures on a Linux system. Essentially, AppArmor enhances the control over the actions of individual programs, contributing to overall system security.
+ - The student being evaluated must first explain the value and operation of sudo using examples of their choice.
+	- sudo is a command-line tool that acts as a privilege escalation tool in Unix-like operating systems, including Linux. If your user is part of the sudo group and is listed in the sudoers file, you can use sudo to perform administrative tasks or tasks that require elevated privileges. Typical administrative tasks include updating the system, installing or removing software, modifying system configurations, and other actions that regular users don't have permission to do by default. The use of sudo helps maintain security by allowing specific users to temporarily gain superuser privileges for authorized actions, without having to log in as the root user all the time.
+	- Logging in as the root user is discouraged because it grants unrestricted access and control over the entire system. When logged in as root, any command or action, intentional or accidental, can significantly impact the stability and security of the system. It increases the risk of making critical mistakes, such as deleting essential system files or installing malicious software without any barriers. The principle of least privilege recommends avoiding constant root access and instead using tools like sudo to grant elevated privileges only when necessary, promoting a more controlled and secure computing environment.
+ - The student being evaluated must be able to explain to you basically what SSH is and the value of using it.
+	-
 
-password        requisite                       pam_pwquality.so retry=3 minlen=10 dcredit=-1 ucredit=-1 lcredit=-1 maxrepeat>
-
-uname -a
-
-sudo ufw status
-sudo service ssh status
-
-getent group sudo
-getent group user42
-sudo adduser username
-sudo groupadd evaluating
-sudo usermod -aG evaluating username
-sudo chage -l username - check password expire rules
-
-sudo nano /etc/pam.d/common-password
-sudo nano /etc/login.defs
-
-sudo hostnamectl set-hostname new_hostname
-sudo nano /etc/hosts - change current hostname to new hostname
-sudo reboot
-lsblk
-
-sudo dpkg -l | grep sudo – to show that sudo is installed
-sudo usermod -aG sudo username
-sudo visudo
-sudo nano /var/log/sudo/sudo.log
-
-sudo ufw status numbered
-sudo ufw allow 8080
-sudo ufw delete allow 8080
-
-sudo service ssh status
-ssh username@127.0.0.1 -p 4242
-
-sudo crontab -u root -e
-sudo /usr/local/bin/monitoring.sh
-sudo systemctl disable cron
-sudo systemctl enable cron
-
-cut -d: -f1 /etc/passwd - show all users
-
-	difok = 7 This argument will change the default of 1 for the number of changes in the new password from the old password.
-	minlen = 10
-	dcredit = -1 digits
-	ucredit = -1 uppercase
-	lcredit = -1 loweercase
-	maxrepeat = 3 Reject passwords which contain more than N same consecutive characters.
-usercheck = 1 if contains the username
-enforcing = 1 rejects the password if it fails
-	retry = 3 times you can try
-	enforce_for_root
 
 # Evaluation sheet
 
