@@ -13,6 +13,8 @@ $${\color{red}\text{Tutorial is incomplete. Still working on it!}}$$
 ## Menu
 * [Partitioning](#Partitioning)
 * [SUDO](#SUDO)
+* [UFW](#UFW)
+
 
 ## Partitioning
 
@@ -405,7 +407,7 @@ Download the `debian-xx.x.x-amd64-netinst.iso` file from [here](https://cdimage.
 
 12. Open iTerm terminal (a normal terminal did not work for me) on your main machine and type `ssh your_username@127.0.0.1 -p 4242` or `ssh your_username@localhost -p 4242` to connect to your server via SSH.
 
-### UFW
+## UFW
 
 1. As per pdf documment provided, we have to install UFW. For this, type:<br> `sudo apt-get install ufw -y`
 
