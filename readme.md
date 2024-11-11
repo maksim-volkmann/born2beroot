@@ -1,5 +1,6 @@
 <div align="center">
-	<img src="https://github.com/maksim-volkmann/42-project-badges/blob/main/badges/born2beroote.png" width="200" alt="Born2beroot badge" /> <br>Born2beroot
+	<img src="https://github.com/maksim-volkmann/42-project-badges/blob/main/badges/born2beroote.png" width="200" alt="Born2beroot badge" />
+	<h1>Born2beroot</h1>
 </div>
 
 
