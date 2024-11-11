@@ -1,6 +1,9 @@
-# ![logo](https://github.com/maksim-volkmann/42-project-badges/blob/main/badges/born2beroote.png?raw=true)<br>Born2beroot
+<div align="center">
+	<img src="https://github.com/maksim-volkmann/42-project-badges/blob/main/badges/born2beroote.png" width="200" alt="Born2beroot badge" /> <br>Born2beroot
+</div>
 
-$${\color{red}\text{Tutorial is incomplete. Still working on it!}}$$
+
+$${\color{red}\text{If you found any mitakes, please pm or create a pull request!}}$$
 
 
 > [!NOTE]
